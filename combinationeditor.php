@@ -11,8 +11,14 @@
 *  @copyright 2022 Karlis Suvi
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 */
+
 if (!defined('_PS_VERSION_')) {
     exit;
+}
+
+$autoloadPath = __DIR__ . '/vendor/autoload.php';
+if (file_exists($autoloadPath)) {
+    require_once $autoloadPath;
 }
 
 class Combinationeditor extends Module
