@@ -1,0 +1,65 @@
+name: PHP
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  php:
+    name: PHP Syntax Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: PHP 7.3 Syntax Check
+        uses: prestashop/github-action-php-lint/7.3@v1
+
+      - name: PHP 7.4 Syntax Check
+        uses: prestashop/github-action-php-lint/7.4@v1
+
+  php-cs-fixer:
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run PHP CS Fixer
+        uses: prestashopcorp/github-action-php-cs-fixer@master
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        prestashop-versions: ['1.7.7', '1.7.8']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache vendor folder
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: php-${{ hashFiles('composer.lock') }}
+
+      - name: Cache composer folder
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: php-composer-cache
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Pull PrestaShop ${{ matrix.prestashop-versions }} files
+        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestashop/prestashop:${{ matrix.prestashop-versions }}-7.3
+
+      - name : Run PHPStan
+        run: docker run --rm --volumes-from temp-ps -v $PWD:/web/module -e _PS_ROOT_DIR_=/var/www/html --workdir=/web/module phpstan/phpstan:1.8 analyse --configuration=/web/module/tests/phpstan/phpstan.neon --error-format github
