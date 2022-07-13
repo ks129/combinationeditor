@@ -8,3 +8,6 @@ vendor/
 
 # JS dependencies
 node_modules/
+
+# PHP CS Fixer cache
+.php-cs-fixer.cache
