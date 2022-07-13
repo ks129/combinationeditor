@@ -78,5 +78,5 @@ jobs:
       - run: composer install
 
       # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
-      - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.presta-versions }})
-        run: ./tests/phpstan.sh ${{ matrix.presta-versions }}
+      - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.prestashop-versions }})
+        run: ./tests/phpstan.sh ${{ matrix.prestashop-versions }}
