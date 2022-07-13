@@ -24,7 +24,7 @@ use AttributeGroup;
 class AttributeGroupDataProvider
 {
     /**
-     * @param int $idLang
+     * @param int $langId
      */
     public function getAttributeGroups(int $langId): array
     {
