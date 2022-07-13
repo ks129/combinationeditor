@@ -22,7 +22,6 @@
     },
     "type": "prestashop-module",
     "require-dev": {
-        "phpstan/phpstan": "^1.8",
         "prestashop/php-dev-tools": "^4.2",
         "prestashop/autoindex": "^2.0"
     }
