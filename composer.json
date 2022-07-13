@@ -10,7 +10,8 @@
     "autoload": {
       "psr-4": {
         "PrestaShop\\Module\\CombinationEditor\\": "src/"
-      }
+      },
+      "classmap": ["combinationeditor.php"]
     },
     "require": {
       "php": ">=7.1.0"
@@ -19,5 +20,10 @@
       "preferred-install": "dist",
       "prepend-autoloader": false
     },
-    "type": "prestashop-module"
+    "type": "prestashop-module",
+    "require-dev": {
+        "phpstan/phpstan": "^1.8",
+        "prestashop/php-dev-tools": "^4.2",
+        "prestashop/autoindex": "^2.0"
+    }
 }
