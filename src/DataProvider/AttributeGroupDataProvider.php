@@ -24,11 +24,10 @@ use AttributeGroup;
 class AttributeGroupDataProvider
 {
     /**
-     * @param int $id_lang
+     * @param int $idLang
      */
     public function getAttributeGroups(int $langId): array
     {
-        //return AttributeGroup::getAttributesGroups($langId);
-        return [];
+        return AttributeGroup::getAttributesGroups($langId);
     }
 }

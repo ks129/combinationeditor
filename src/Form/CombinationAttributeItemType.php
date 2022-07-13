@@ -18,7 +18,6 @@ namespace PrestaShop\Module\CombinationEditor\Form;
 
 use PrestaShop\Module\CombinationEditor\ChoiceProvider\AttributeGroupChoiceProvider;
 use PrestaShop\Module\CombinationEditor\DataProvider\AttributeDataProvider;
-use PrestaShopBundle\Form\Admin\Type\IconButtonType;
 use PrestaShopBundle\Form\Admin\Type\TranslatorAwareType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -73,20 +72,7 @@ class CombinationAttributeItemType extends TranslatorAwareType
             ->add('attribute_group', ChoiceType::class, [
                 'choices' => $this->attributeGroupChoiceProvider->getChoices(),
                 'required' => false,
-            ])
-            ->add('remove', IconButtonType::class, [
-                'icon' => 'delete',
-                'attr' => [
-                    'class' => 'text-secondary remove-customization-btn tooltip-link',
-                    'data-modal-title' => $this->trans('Delete item', 'Admin.Notifications.Warning'),
-                    'data-modal-message' => $this->trans('Are you sure you want to delete this item?', 'Admin.Notifications.Warning'),
-                    'data-modal-apply' => $this->trans('Delete', 'Admin.Actions'),
-                    'data-modal-cancel' => $this->trans('Cancel', 'Admin.Actions'),
-                    'data-toggle' => 'pstooltip',
-                    'data-original-title' => $this->trans('Delete', 'Admin.Global'),
-                ],
-            ])
-        ;
+            ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'addAttributesList']);
         $builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'addAttributesList']);

@@ -35,6 +35,6 @@ class CombinationEditorController extends FrameworkBundleAdminController
             $choices[$attribute['name']] = (int) $choices['id_attribute'];
         }
 
-        return JsonResponse($choices);
+        return new JsonResponse($choices);
     }
 }
