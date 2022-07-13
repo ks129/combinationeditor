@@ -28,6 +28,7 @@ class AttributeGroupDataProvider
      */
     public function getAttributeGroups(int $langId): array
     {
-        return AttributeGroup::getAttributesGroups($langId);
+        //return AttributeGroup::getAttributesGroups($langId);
+        return [];
     }
 }
