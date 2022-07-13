@@ -17,8 +17,8 @@ declare(strict_types=1);
 namespace PrestaShop\Module\CombinationEditor\Controller;
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class CombinationEditorController extends FrameworkBundleAdminController
 {

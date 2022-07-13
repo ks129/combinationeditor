@@ -20,10 +20,10 @@ use PrestaShop\Module\CombinationEditor\ChoiceProvider\AttributeGroupChoiceProvi
 use PrestaShop\Module\CombinationEditor\DataProvider\AttributeDataProvider;
 use PrestaShopBundle\Form\Admin\Type\IconButtonType;
 use PrestaShopBundle\Form\Admin\Type\TranslatorAwareType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class CombinationAttributeItemType extends TranslatorAwareType
@@ -45,7 +45,7 @@ class CombinationAttributeItemType extends TranslatorAwareType
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @param AttributeGroupChoiceProvider $attributeGroupChoiceProvider
      * @param AttributeDataProvider $attributeDataProvider
      * @param int $langId
