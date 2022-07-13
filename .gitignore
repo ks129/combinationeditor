@@ -1,0 +1,10 @@
+.DS_Store
+
+# Vendor folder will be created to production module by CI
+vendor/
+
+# IntelliJ IDEA based IDEs user config
+.idea/
+
+# JS dependencies
+node_modules/

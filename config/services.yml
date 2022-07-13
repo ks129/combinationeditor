@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    public: true
+  
+  prestashop.module.combinationeditor.data_provider.attribute_data_provider:
+    class: 'PrestaShop\Module\CombinationEditor\DataProvider\AttributeDataProvider'
+  
+  prestashop.module.combinationeditor.data_provider.attribute_group_data_provider:
+    class: 'PrestaShop\Module\CombinationEditor\DataProvider\AttributeGroupDataProvider'

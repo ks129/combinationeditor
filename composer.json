@@ -1,0 +1,23 @@
+{
+    "name": "ks129/combinationeditor",
+    "description": "Change combination's attributes even after creation.",
+    "license": "AFL-3.0",
+    "authors": [
+      {
+        "name": "Karlis Suvi"
+      }
+    ],
+    "autoload": {
+      "psr-4": {
+        "PrestaShop\\Module\\CombinationEditor\\": "src/"
+      }
+    },
+    "require": {
+      "php": ">=7.1.0"
+    },
+    "config": {
+      "preferred-install": "dist",
+      "prepend-autoloader": false
+    },
+    "type": "prestashop-module"
+}

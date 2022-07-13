@@ -1,0 +1,7 @@
+combinationeditor_get_attributes:
+  path: /combinationeditor/get-attributes/{attributeGroupId}
+  methods: [GET]
+  defaults:
+    _controller: 'PrestaShop\Module\CombinationEditor\Controller\CombinationEditorController::getAttributesAction'
+  requirements:
+    attributeGroupId: \d+
