@@ -25,4 +25,5 @@ docker run --rm --volumes-from temp-ps \
        -e _PS_ROOT_DIR_=/var/www/html \
        --workdir=/var/www/html/modules/combinationeditor ghcr.io/phpstan/phpstan:1 \
        analyse \
-       --configuration=/var/www/html/modules/combinationeditor/tests/phpstan/phpstan.neon
+       --configuration=/var/www/html/modules/combinationeditor/tests/phpstan/phpstan.neon \
+       -v
