@@ -27,7 +27,7 @@ class CombinationAttributes
     private $combinationAttributes;
 
     /**
-     * @param array<CombinationAttribute>
+     * @param array<CombinationAttribute> $combinationAttributes
      */
     public function __construct(array $combinationAttributes)
     {
