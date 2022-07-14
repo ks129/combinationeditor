@@ -20,7 +20,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class CombinationAttributeType extends AbstractType
+class CombinationAttributesType extends AbstractType
 {
     /**
      * {@inheritdoc}
