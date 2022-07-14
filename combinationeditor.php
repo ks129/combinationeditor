@@ -17,8 +17,6 @@ if (!defined('_PS_VERSION_')) {
 
 class Combinationeditor extends Module
 {
-    protected $config_form = false;
-
     public function __construct()
     {
         $this->name = 'combinationeditor';
@@ -29,12 +27,20 @@ class Combinationeditor extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('Combination Attributes Editor');
-        $this->description = $this->l('Change combination\'s attributes even after creation.');
+        $this->displayName = $this->trans('Combination Attributes Editor', [], 'Modules.Combinationeditor.Admin');
+        $this->description = $this->trans('Change combination\'s attributes even after creation.', [], 'Modules.Combinationeditor.Admin');
 
-        $this->confirmUninstall = $this->l('Are you sure you want to uninstall this module?');
+        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall this module?', [], 'Modules.Combinationeditor.Admin');
 
         $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUsingNewTranslationSystem()
+    {
+        return true;
     }
 
     public function install()
