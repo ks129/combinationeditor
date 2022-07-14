@@ -60,7 +60,7 @@ class SetCombinationAttributesCommand
 
     /**
      * @param array<int> $attributeIds
-     * 
+     *
      * @return self
      */
     public function setAttributeIds(array $attributeIds): self

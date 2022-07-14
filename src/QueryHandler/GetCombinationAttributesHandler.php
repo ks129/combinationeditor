@@ -32,7 +32,7 @@ class GetCombinationAttributesHandler
 {
     /**
      * @param GetCombinationAttributes $query
-     * 
+     *
      * @return CombinationAttributes
      */
     public function handle(GetCombinationAttributes $query): CombinationAttributes
@@ -44,14 +44,10 @@ class GetCombinationAttributesHandler
             $combination = new Combination($combinationId);
 
             if ((int) $combination->id !== $combinationId) {
-                throw new CombinationNotFoundException(
-                    sprintf('Cannot find combination with ID %d', $combinationId)
-                );
+                throw new CombinationNotFoundException(sprintf('Cannot find combination with ID %d', $combinationId));
             }
         } catch (PrestaShopException $e) {
-            throw new CannotGetCombinationAttributesException(
-                sprintf('An error occurred when receiving combination with ID %d', $combinationId)
-            );
+            throw new CannotGetCombinationAttributesException(sprintf('An error occurred when receiving combination with ID %d', $combinationId));
         }
 
         // Now create query for getting all necessary data.

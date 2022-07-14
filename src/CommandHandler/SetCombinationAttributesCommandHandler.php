@@ -33,14 +33,12 @@ class SetCombinationAttributesCommandHandler
     public function handle(SetCombinationAttributesCommand $command): void
     {
         $combinationId = $command->getCombinationId()->getValue();
-        
+
         try {
             $combination = new Combination($combinationId);
 
             if ((int) $combination->id !== $combinationId) {
-                throw new CombinationNotFoundException(
-                    sprintf('Cannot find combination with ID %d', $combinationId),
-                );
+                throw new CombinationNotFoundException(sprintf('Cannot find combination with ID %d', $combinationId), );
             }
         } catch (PrestaShopException $e) {
             throw new CannotSetCombinationAttributesException(sprintf('Error occurred when receiving combination with ID %d', $combinationId));
@@ -54,10 +52,7 @@ class SetCombinationAttributesCommandHandler
         try {
             $combination->setAttributes($attributeIds);
         } catch (PrestaShopException $e) {
-            throw new CannotSetCombinationAttributesException(
-                sprintf('Error occurred when setting attributes for combination with ID %d', (int) $combination->id),
-                CannotSetCombinationAttributesException::CANNOT_SET_ATTRIBUTES
-            );
+            throw new CannotSetCombinationAttributesException(sprintf('Error occurred when setting attributes for combination with ID %d', (int) $combination->id), CannotSetCombinationAttributesException::CANNOT_SET_ATTRIBUTES);
         }
     }
 }
