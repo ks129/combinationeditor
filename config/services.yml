@@ -21,7 +21,7 @@ services:
         command: 'PrestaShop\Module\CombinationEditor\Command\SetCombinationAttributesCommand'
 
   prestashop.module.combinationeditor.query_handler.get_combination_attributes_handler:
-    class: 'PrestaShop\Module\CombinationEditor\CommandHandler\GetCombinationAttributesHandler'
+    class: 'PrestaShop\Module\CombinationEditor\QueryHandler\GetCombinationAttributesHandler'
     tags:
       - name: tactician.handler
         command: 'PrestaShop\Module\CombinationEditor\Query\GetCombinationAttributes'
