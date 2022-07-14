@@ -11,6 +11,9 @@
 *  @copyright 2022 Karlis Suvi
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 */
+
+use PrestaShop\Module\CombinationEditor\Query\GetCombinationAttributes;
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -46,8 +49,8 @@ class Combinationeditor extends Module
     public function install()
     {
         return parent::install() &&
-            $this->registerHook('backOfficeHeader') &&
-            $this->registerHook('displayProductExtraContent');
+            $this->registerHook('actionAdminControllerSetMedia') &&
+            $this->registerHook('displayAdminProductsCombinationBottom');
     }
 
     public function uninstall()
@@ -58,16 +61,39 @@ class Combinationeditor extends Module
     /**
      * Add the CSS & JavaScript files you want to be loaded in the BO.
      */
-    public function hookBackOfficeHeader()
+    public function hookActionAdminControllerSetMedia()
     {
-        if (Tools::getValue('module_name') == $this->name) {
-            $this->context->controller->addJS($this->_path . 'views/js/back.js');
-            $this->context->controller->addCSS($this->_path . 'views/css/back.css');
+        if (!$this->isSymfonyContext()) {
+            return;
         }
+
+        $requestStack = $this->get('request_stack');
+        $currentRequest = $requestStack->getCurrentRequest();
+
+        if (null === $currentRequest || 'admin_product_form' !== $currentRequest->get('_route')) {
+            return;
+        }
+
+        $this->context->controller->addJS(
+            "{$this->getPathUri()}views/js/combinationeditor.js"
+        );
     }
 
-    public function hookDisplayProductExtraContent()
+    /**
+     * Displays attributes form under combination settings.
+     * 
+     * @param array $params
+     */
+    public function hookDisplayAdminProductsCombinationBottom($params)
     {
-        /* Place your code here. */
+        $formBuilder = $this->get('prestashop.module.combinationeditor.form.identifiable_object.builder.combination_attributes_form_builder');
+        $form = $formBuilder->getFormFor((int) $params['id_product_attribute']);
+
+        return $this->get('twig')->render(
+            '@Modules/combinationeditor/views/templates/admin/attributes_manager.html.twig',
+            [
+                'attributesForm' => $form->createView(),
+            ]
+        );
     }
 }
