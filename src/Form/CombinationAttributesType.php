@@ -15,3 +15,24 @@
 declare(strict_types=1);
 
 namespace PrestaShop\Module\CombinationEditor\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\FormBuilderInterface;
+
+class CombinationAttributeType extends AbstractType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('attributes', CollectionType::class, [
+                'entry_type' => CombinationAttributeItemType::class,
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ]);
+    }
+}
