@@ -50,8 +50,8 @@ final class CombinationAttributesDataProvider implements FormDataProviderInterfa
 
         foreach ($combinationAttributes->getCombinationAttributes() as $combinationAttribute) {
             $data['attributes'][] = [
-                'attribute_group' => $combinationAttribute->getAttributeGroupId(),
-                'attribute' => $combinationAttribute->getAttributeId(),
+                'attribute_group' => $combinationAttribute->getAttributeGroupId()->getValue(),
+                'attribute' => $combinationAttribute->getAttributeId()->getValue(),
             ];
         }
 

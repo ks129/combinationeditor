@@ -76,7 +76,7 @@ class CombinationAttributeItemType extends AbstractType
     /**
      * @param FormEvent $event
      */
-    protected function addAttributesList(FormEvent $event): void
+    public function addAttributesList(FormEvent $event): void
     {
         $form = $event->getForm();
         $data = $event->getData();

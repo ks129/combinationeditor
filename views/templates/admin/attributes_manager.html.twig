@@ -19,7 +19,7 @@
   {{ form_errors(attributesForm.attributes) }}
   <ul class="attriubtesCollection nostyle" data-prototype="{% filter escape %}{{ include('@Modules/combinationeditor/views/templates/admin/attribute.html.twig', {'form': attributesForm.attributes.vars.prototype}) }}{% endfilter %}">
     {% for field in attributesForm.attributes %}
-      {{ include('@Modules/combinationeditor/views/templates/admin/attribute.html.twig', {'form': attributesForm.attributes.vars.prototype}) }}
+      {{ include('@Modules/combinationeditor/views/templates/admin/attribute.html.twig', {'form': field}) }}
     {% endfor %}
   </ul>
 
