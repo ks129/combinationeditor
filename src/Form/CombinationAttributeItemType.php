@@ -18,14 +18,13 @@ namespace PrestaShop\Module\CombinationEditor\Form;
 
 use PrestaShop\Module\CombinationEditor\ChoiceProvider\AttributeGroupChoiceProvider;
 use PrestaShop\Module\CombinationEditor\DataProvider\AttributeDataProvider;
-use PrestaShopBundle\Form\Admin\Type\TranslatorAwareType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Translation\TranslatorInterface;
 
-class CombinationAttributeItemType extends TranslatorAwareType
+class CombinationAttributeItemType extends AbstractType
 {
     /**
      * @var AttributeGroupChoiceProvider
@@ -50,14 +49,10 @@ class CombinationAttributeItemType extends TranslatorAwareType
      * @param int $langId
      */
     public function __construct(
-        TranslatorInterface $translator,
-        array $locales,
         AttributeGroupChoiceProvider $attributeGroupChoiceProvider,
         AttributeDataProvider $attributeDataProvider,
         int $langId
     ) {
-        parent::__construct($translator, $locales);
-
         $this->attributeGroupChoiceProvider = $attributeGroupChoiceProvider;
         $this->attributeDataProvider = $attributeDataProvider;
         $this->langId = $langId;
