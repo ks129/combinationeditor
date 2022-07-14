@@ -11,3 +11,6 @@ node_modules/
 
 # PHP CS Fixer cache
 .php-cs-fixer.cache
+
+# Compiled JS
+views/js/

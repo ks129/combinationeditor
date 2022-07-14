@@ -1,0 +1,52 @@
+name: Build
+on: [push, pull_request]
+
+jobs:
+    deploy:
+        name: build dependencies & create artifact
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Setup Node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '14.x'
+                  always-auth: true
+                  registry-url: https://npm.pkg.github.com
+
+            - name: Install JS dependencies
+              run: npm install --ignore-scripts
+
+            - name: Build JS
+              run: |
+                  npm run build
+                  rm -rf node_modules/
+
+            # Install PHP dependencies
+            - name: Install composer dependencies
+              run: composer install -o
+            
+            - name: Run autoindex
+              run: cp index.php vendor/prestashop/autoindex/assets/index.php && php vendor/bin/autoindex prestashop:add:index
+            
+            - name: Remove dev dependencies
+              run: composer install --no-dev -o
+            
+            - name: Dump autoload
+              run: composer dump-autoload --no-dev -o
+              
+            - name: Set permissions
+              run: find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \;
+
+            # Remove development files
+            - name: Clean-up project
+              uses: PrestaShopCorp/github-action-clean-before-deploy@v1.0
+
+            # Zip files and upload to artifacts list
+            - name: Create & upload artifact
+              uses: actions/upload-artifact@v1
+              with:
+                  name: ${{ github.event.repository.name }}
+                  path: ../
