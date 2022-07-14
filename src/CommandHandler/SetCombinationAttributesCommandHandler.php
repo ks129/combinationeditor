@@ -19,6 +19,7 @@ namespace PrestaShop\Module\CombinationEditor\CommandHandler;
 use Combination;
 use PrestaShop\Module\CombinationEditor\Command\SetCombinationAttributesCommand;
 use PrestaShop\Module\CombinationEditor\Exception\CannotSetCombinationAttributesException;
+use PrestaShop\Module\CombinationEditor\Exception\CombinationNotFoundException;
 use PrestaShopException;
 
 /**
@@ -36,10 +37,9 @@ class SetCombinationAttributesCommandHandler
         try {
             $combination = new Combination($combinationId);
 
-            if ($combination->id != $combinationId) {
-                throw new CannotSetCombinationAttributesException(
+            if ((int) $combination->id !== $combinationId) {
+                throw new CombinationNotFoundException(
                     sprintf('Cannot find combination with ID %d', $combinationId),
-                    CannotSetCombinationAttributesException::COMBINATION_NOT_FOUND
                 );
             }
         } catch (PrestaShopException $e) {
@@ -55,7 +55,7 @@ class SetCombinationAttributesCommandHandler
             $combination->setAttributes($attributeIds);
         } catch (PrestaShopException $e) {
             throw new CannotSetCombinationAttributesException(
-                sprinf('Error occurred when setting attributes for combination with ID %d', (int) $combination->id),
+                sprintf('Error occurred when setting attributes for combination with ID %d', (int) $combination->id),
                 CannotSetCombinationAttributesException::CANNOT_SET_ATTRIBUTES
             );
         }

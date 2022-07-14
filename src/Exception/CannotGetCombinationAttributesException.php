@@ -17,12 +17,8 @@ declare(strict_types=1);
 namespace PrestaShop\Module\CombinationEditor\Exception;
 
 /**
- * Exception for combination's attributes setting.
+ * Exception for case when getting attributes fails.
  */
-class CannotSetCombinationAttributesException extends CombinationAttributeException
+class CannotGetCombinationAttributesException extends CombinationAttributeException
 {
-    /**
-     * When cannot set attributes for combination.
-     */
-    public const CANNOT_SET_ATTRIBUTES = 10;
 }
