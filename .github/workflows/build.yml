@@ -27,15 +27,15 @@ jobs:
             # Install PHP dependencies
             - name: Install composer dependencies
               run: composer install -o
+
+            - name: Run autoindex
+              run: cp index.php vendor/prestashop/autoindex/assets/index.php && php vendor/bin/autoindex prestashop:add:index --exclude=vendor/
             
             - name: Remove dev dependencies
               run: composer install --no-dev -o
             
             - name: Dump autoload
               run: composer dump-autoload --no-dev -o
-
-            - name: Run autoindex
-              run: cp index.php vendor/prestashop/autoindex/assets/index.php && php vendor/bin/autoindex prestashop:add:index
               
             - name: Set permissions
               run: find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \;
