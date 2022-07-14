@@ -87,13 +87,14 @@ class Combinationeditor extends Module
     public function hookDisplayAdminProductsCombinationBottom($params)
     {
         $formBuilder = $this->get('prestashop.module.combinationeditor.form.identifiable_object.builder.combination_attributes_form_builder');
-        $form = $formBuilder->getFormFor((int) $params['id_product_attribute']);
         $twig = $this->get('twig');
 
-        // In case form or Twig service doesn't exist, don't render anything
-        if ($form === false || $twig === false) {
+        // In case form builder or Twig service doesn't exist, don't render anything
+        if ($formBuilder === false || $twig === false) {
             return '';
         }
+
+        $form = $formBuilder->getFormFor((int) $params['id_product_attribute']);
 
         return $twig->render(
             '@Modules/combinationeditor/views/templates/admin/attributes_manager.html.twig',
