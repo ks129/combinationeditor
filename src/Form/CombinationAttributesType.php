@@ -31,6 +31,7 @@ class CombinationAttributeType extends AbstractType
             ->add('attributes', CollectionType::class, [
                 'entry_type' => CombinationAttributeItemType::class,
                 'prototype' => true,
+                'prototype_name' => '__COMBINATION_ATTRIBUTE_INDEX__',
                 'allow_add' => true,
                 'allow_delete' => true,
             ]);
