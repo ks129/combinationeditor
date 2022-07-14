@@ -11,9 +11,6 @@
 *  @copyright 2022 Karlis Suvi
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 */
-
-use PrestaShop\Module\CombinationEditor\Query\GetCombinationAttributes;
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -68,9 +65,12 @@ class Combinationeditor extends Module
         }
 
         $requestStack = $this->get('request_stack');
-        $currentRequest = $requestStack->getCurrentRequest();
+        if ($requestStack === false) {
+            return;
+        }
 
-        if (null === $currentRequest || 'admin_product_form' !== $currentRequest->get('_route')) {
+        $currentRequest = $requestStack->getCurrentRequest();
+        if ($currentRequest === null || $currentRequest->get('_route') !== 'admin_product_form') {
             return;
         }
 
@@ -81,15 +81,21 @@ class Combinationeditor extends Module
 
     /**
      * Displays attributes form under combination settings.
-     * 
+     *
      * @param array $params
      */
     public function hookDisplayAdminProductsCombinationBottom($params)
     {
         $formBuilder = $this->get('prestashop.module.combinationeditor.form.identifiable_object.builder.combination_attributes_form_builder');
         $form = $formBuilder->getFormFor((int) $params['id_product_attribute']);
+        $twig = $this->get('twig');
 
-        return $this->get('twig')->render(
+        // In case form or Twig service doesn't exist, don't render anything
+        if ($form === false || $twig === false) {
+            return '';
+        }
+
+        return $twig->render(
             '@Modules/combinationeditor/views/templates/admin/attributes_manager.html.twig',
             [
                 'attributesForm' => $form->createView(),
