@@ -7,3 +7,21 @@ services:
   
   prestashop.module.combinationeditor.data_provider.attribute_group_data_provider:
     class: 'PrestaShop\Module\CombinationEditor\DataProvider\AttributeGroupDataProvider'
+
+  prestashop.module.combinationeditor.choice_provider.attribute_group_choice_provider:
+    class: 'PrestaShop\Module\CombinationEditor\ChoiceProvider\AttributeGroupChoiceProvider'
+    arguments:
+      - '@prestashop.module.combinationeditor.data_provider.attribute_group_data_provider'
+      - '@=service("prestashop.adapter.legacy.context").getLanguage().id'
+
+  prestashop.module.combinationeditor.command_handler.set_combination_attributes_command_handler:
+    class: 'PrestaShop\Module\CombinationEditor\CommandHandler\SetCombinationAttributesCommandHandler'
+    tags:
+      - name: tactician.handler
+        command: 'PrestaShop\Module\CombinationEditor\Command\SetCombinationAttributesCommand'
+
+  prestashop.module.combinationeditor.query_handler.get_combination_attributes_handler:
+    class: 'PrestaShop\Module\CombinationEditor\CommandHandler\GetCombinationAttributesHandler'
+    tags:
+      - name: tactician.handler
+        command: 'PrestaShop\Module\CombinationEditor\Query\GetCombinationAttributes'
