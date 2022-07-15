@@ -112,6 +112,7 @@ class CombinationEditorController extends FrameworkBundleAdminController
             'success' => true,
             'name' => $name,
             'title' => $this->trans('Combination details', 'Admin.Catalog.Feature') . ' - ' . $name,
+            'message' => $this->trans('Combination updated successfully', 'Modules.Combinationeditor.Feature'),
         ]);
     }
 }
