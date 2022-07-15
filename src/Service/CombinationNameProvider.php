@@ -38,12 +38,15 @@ class CombinationNameProvider
             FROM `' . _DB_PREFIX_ . 'product_attribute_combination` pac
             LEFT JOIN `' . _DB_PREFIX_ . 'attribute` a ON (pac.`id_attribute` = a.`id_attribute`)
             LEFT JOIN `' . _DB_PREFIX_ . 'attribute_lang` al ON (a.`id_attribute` = al.`id_attribute` AND al.`id_lang` = ' . $langId . ')
-            LEFT JOIN `' . _DB_PREFIX_ . 'attribute_group_lang` agl ON (a.`id_attribute_group` = agl.`id_attribute_attribute` AND agl.`id_lang` = ' . $langId . ')
+            LEFT JOIN `' . _DB_PREFIX_ . 'attribute_group_lang` agl ON (a.`id_attribute_group` = agl.`id_attribute_group` AND agl.`id_lang` = ' . $langId . ')
             WHERE pac.`id_product_attribute` = ' . $combinationId . ';
         ');
 
-        return implode(', ', array_map(function (array $attribute) {
-            return sprintf('%s - %s', $attribute['attribute_name'], $attribute['attribute_group_name']);
-        }, $attributes));
+        $pairs = [];
+        foreach ($attributes as $attribute) {
+            $pairs[] = sprintf('%s - %s', $attribute['attribute_group_name'], $attribute['attribute_name']);
+        }
+
+        return implode(', ', $pairs);
     }
 }
