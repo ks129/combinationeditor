@@ -36,4 +36,12 @@ class CombinationAttributesType extends AbstractType
                 'allow_delete' => true,
             ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'combinationeditor_attributes';
+    }
 }
