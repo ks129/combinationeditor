@@ -44,6 +44,9 @@ jobs:
             - name: Clean-up project
               uses: PrestaShopCorp/github-action-clean-before-deploy@v1.0
 
+            - name: Remove development files
+              run: rm -rf .babelrc .eslintignore .eslintrc.js .php-cs-fixer.dist.php package.json package-lock.json webpack.config.js
+
             # Zip files and upload to artifacts list
             - name: Create & upload artifact
               uses: actions/upload-artifact@v1
