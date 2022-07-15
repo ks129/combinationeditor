@@ -12,4 +12,29 @@
 */
 const {$} = window;
 
-$(document).ready(() => {});
+$(document).ready(() => {
+  $('.combinationeditor-manager .combinationeditor-attribute-group').change((event) => {
+    event.preventDefault();
+
+    // Fetch new attributes data
+    $.ajax({
+      type: 'GET',
+      url: $(this).data('url'),
+      success: (response) => {
+        console.log(response);
+      },
+    });
+  });
+
+  $('.combinationeditor-manager .combinationeditor-add-attribute').click((event) => {
+    event.preventDefault();
+  });
+
+  $('.combinationeditor-manager .combinationeditor-save').click((event) => {
+    event.preventDefault();
+  });
+
+  $('.combinationeditor-manager .delete').click((event) => {
+    event.preventDefault();
+  });
+});

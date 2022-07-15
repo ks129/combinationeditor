@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CombinationAttributeItemType extends AbstractType
 {
@@ -42,6 +43,11 @@ class CombinationAttributeItemType extends AbstractType
     private $langId;
 
     /**
+     * @var UrlGeneratorInterface
+     */
+    private $router;
+
+    /**
      * {@inheritdoc}
      *
      * @param AttributeGroupChoiceProvider $attributeGroupChoiceProvider
@@ -51,11 +57,13 @@ class CombinationAttributeItemType extends AbstractType
     public function __construct(
         AttributeGroupChoiceProvider $attributeGroupChoiceProvider,
         AttributeDataProvider $attributeDataProvider,
-        int $langId
+        int $langId,
+        UrlGeneratorInterface $router
     ) {
         $this->attributeGroupChoiceProvider = $attributeGroupChoiceProvider;
         $this->attributeDataProvider = $attributeDataProvider;
         $this->langId = $langId;
+        $this->router = $router;
     }
 
     /**
@@ -63,9 +71,19 @@ class CombinationAttributeItemType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $choices = $this->attributeGroupChoiceProvider->getChoices();
         $builder
             ->add('attribute_group', ChoiceType::class, [
-                'choices' => $this->attributeGroupChoiceProvider->getChoices(),
+                'choices' => $this->choices,
+                'choice_attr' => function ($choice, $key, $value) {
+                    return [
+                        'data-url' => $this->router->generate(
+                            'combinationeditor_get_attributes',
+                            ['attributeGroupId' => (int) $value]
+                        )
+                    ];
+                },
+                'attr' => ['class' => 'combinationeditor-attribute-group'],
             ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'addAttributesList']);
@@ -88,6 +106,7 @@ class CombinationAttributeItemType extends AbstractType
 
         $form->add('attribute', ChoiceType::class, [
             'choices' => $choices,
+            'attr' => ['class' => 'combinationeditor-attribute'],
         ]);
     }
 }
