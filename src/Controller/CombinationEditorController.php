@@ -28,7 +28,7 @@ class CombinationEditorController extends FrameworkBundleAdminController
 {
     /**
      * @AdminSecurity("is_granted('update', 'AdminProducts')", message="You do not have permission edit products.")
-     * 
+     *
      * Returns list of given attribute group attributes for dropdown.
      */
     public function getAttributesAction(Request $request, int $attributeGroupId): JsonResponse
@@ -46,7 +46,7 @@ class CombinationEditorController extends FrameworkBundleAdminController
 
     /**
      * @AdminSecurity("is_granted('update', 'AdminProducts')", message="You do not have permission edit products.")
-     * 
+     *
      * Saves combination's attributes.
      */
     public function saveAttributesAction(Request $request, int $combinationId): JsonResponse
@@ -67,7 +67,7 @@ class CombinationEditorController extends FrameworkBundleAdminController
             return new JsonResponse(
                 [
                     'success' => false,
-                    'message' => $this->trans('Combination must have at least one attribute.', 'Modules.Combinationeditor.Error')
+                    'message' => $this->trans('Combination must have at least one attribute.', 'Modules.Combinationeditor.Error'),
                 ]
             );
         }

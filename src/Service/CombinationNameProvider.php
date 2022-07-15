@@ -25,10 +25,10 @@ class CombinationNameProvider
 {
     /**
      * Provides combination name.
-     * 
+     *
      * @param int $combinationId
      * @param int $langId
-     * 
+     *
      * @return string
      */
     public function getName(int $combinationId, int $langId): string
