@@ -74,13 +74,13 @@ class CombinationAttributeItemType extends AbstractType
         $choices = $this->attributeGroupChoiceProvider->getChoices();
         $builder
             ->add('attribute_group', ChoiceType::class, [
-                'choices' => $this->choices,
+                'choices' => $choices,
                 'choice_attr' => function ($choice, $key, $value) {
                     return [
                         'data-url' => $this->router->generate(
                             'combinationeditor_get_attributes',
                             ['attributeGroupId' => (int) $value]
-                        )
+                        ),
                     ];
                 },
                 'attr' => ['class' => 'combinationeditor-attribute-group'],
