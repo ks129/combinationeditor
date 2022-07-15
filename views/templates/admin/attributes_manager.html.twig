@@ -13,7 +13,10 @@
 
 {% form_theme attributesForm 'PrestaShopBundle:Admin/TwigTemplateForm:prestashop_ui_kit.html.twig' %}
 
-<div class="combinationeditor-manager">
+{{ form_start(attributesForm, {
+  'action': path('combinationeditor_save_attributes', {combinationId: idProductAttribute})
+}) }}
+<div class="combinationeditor-manager" data-combination-id="{{ idProductAttribute }}">
   <h2>{{ 'Attributes'|trans({}, 'Modules.Combinationeditor.Feature') }}</h2>
   <p class="subtitle">{{ 'Use "Save attributes" button for saving, standard product save button doesn\'t save attributes.'|trans({}, 'Modules.Combinationeditor.Help') }}</p>
   {{ form_errors(attributesForm.attributes) }}
@@ -32,3 +35,4 @@
     {{ 'Save attributes'|trans({}, 'Modules.Combinationeditor.Feature') }}
   </button>
 </div>
+{{ form_end(attributesForm) }}

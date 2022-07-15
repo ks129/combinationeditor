@@ -3,5 +3,21 @@ combinationeditor_get_attributes:
   methods: [GET]
   defaults:
     _controller: 'PrestaShop\Module\CombinationEditor\Controller\CombinationEditorController::getAttributesAction'
+    _legacy_controller: CombinationeditorController
+    _legacy_link: CombinationeditorController:getAttributes
+    _legacy_parameters:
+      id_attribute_group: attributeGroupId
   requirements:
     attributeGroupId: \d+
+
+combinationeditor_save_attributes:
+  path: /combinationeditor/save-attributes/{combinationId}
+  methods: [POST]
+  defaults:
+    _controller: 'PrestaShop\Module\CombinationEditor\Controller\CombinationEditorController::saveAttributesAction'
+    _legacy_controller: CombinationeditorController
+    _legacy_link: CombinationeditorController:saveAttributes
+    _legacy_parameters:
+      id_combination: combinationId
+  requirements:
+    combinationId: \d+

@@ -42,6 +42,10 @@ $(document).ready(() => {
 
   $(document).on('click', '.combinationeditor-manager .combinationeditor-save', (event) => {
     event.preventDefault();
+    const btn = $(event.target);
+
+    const form = btn.closest('form[name=combination_attributes]');
+    console.log(form.serializeArray());
   });
 
   $(document).on('click', '.combinationeditor-manager .delete', (event) => {

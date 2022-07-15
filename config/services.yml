@@ -47,3 +47,6 @@ services:
     arguments:
       - 'PrestaShop\Module\CombinationEditor\Form\CombinationAttributesType'
       - '@prestashop.module.combinationeditor.form.data_provider.combination_attributes_data_provider'
+
+  prestashop.module.combinationeditor.service.combination_name_provider:
+    class: 'PrestaShop\Module\CombinationEditor\Service\CombinationNameProvider'

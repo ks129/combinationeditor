@@ -100,6 +100,7 @@ class Combinationeditor extends Module
             '@Modules/combinationeditor/views/templates/admin/attributes_manager.html.twig',
             [
                 'attributesForm' => $form->createView(),
+                'idProductAttribute' => (int) $params['id_product_attribute'],
             ]
         );
     }
