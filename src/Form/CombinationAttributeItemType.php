@@ -66,7 +66,6 @@ class CombinationAttributeItemType extends AbstractType
         $builder
             ->add('attribute_group', ChoiceType::class, [
                 'choices' => $this->attributeGroupChoiceProvider->getChoices(),
-                'required' => false,
             ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'addAttributesList']);
@@ -89,7 +88,6 @@ class CombinationAttributeItemType extends AbstractType
 
         $form->add('attribute', ChoiceType::class, [
             'choices' => $choices,
-            'required' => false,
         ]);
     }
 }

@@ -13,8 +13,8 @@
 
 {% form_theme attributesForm 'PrestaShopBundle:Admin/TwigTemplateForm:prestashop_ui_kit.html.twig' %}
 
-<div id="combinationeditor-manager" class="mt-3">
-  <h2>{{ 'Attributes'|trans({}, 'Admin.Catalog.Feature') }}</h2>
+<div class="combinationeditor-manager">
+  <h2>{{ 'Attributes'|trans({}, 'Modules.Combinationeditor.Feature') }}</h2>
   <p class="subtitle">{{ 'Use "Save attributes" button for saving, standard product save button doesn\'t save attributes.'|trans({}, 'Modules.Combinationeditor.Help') }}</p>
   {{ form_errors(attributesForm.attributes) }}
   <ul class="attriubtesCollection nostyle" data-prototype="{% filter escape %}{{ include('@Modules/combinationeditor/views/templates/admin/attribute.html.twig', {'form': attributesForm.attributes.vars.prototype}) }}{% endfilter %}">
@@ -23,12 +23,12 @@
     {% endfor %}
   </ul>
 
-  <a href="#" class="btn btn-outline-secondary" id="combinationeditor-add-attribute">
+  <a href="#" class="btn btn-outline-secondary combinationeditor-add-attribute">
     <i class="material-icons">add_circle</i>
     {{ 'Add an attribute'|trans({}, 'Modules.Combinationeditor.Feature') }}
   </a>
 
-  <a href="#" class="btn btn-primary" id="combinationeditor-save">
+  <button type="submit" class="btn btn-primary combinationeditor-save">
     {{ 'Save attributes'|trans({}, 'Modules.Combinationeditor.Feature') }}
-  </a>
+  </button>
 </div>
