@@ -44,8 +44,28 @@ $(document).ready(() => {
     event.preventDefault();
     const btn = $(event.target);
 
-    const form = btn.closest('form[name=combination_attributes]');
-    console.log(form.serializeArray());
+    const form = btn.closest('form[name=combinationeditor_attributes]');
+
+    $.ajax({
+      type: 'POST',
+      url: form.attr('action'),
+      dataType: 'JSON',
+      data: form.serialize(),
+      success: (response) => {
+        if (response.success === false) {
+          showErrorMessage(response.message);
+        } else {
+          showSuccessMessage(response.message);
+          form.closest('.row').closest('.panel').find('h2.title:first').text(response.title);
+          $(`tr#attribute_${form.data('combinationId')} td:nth-child(3)`).text(response.name);
+        }
+      },
+      error: (xhr) => {
+        const errorMessage = `${xhr.status}: ${xhr.statusText}`;
+        showErrorMessage(errorMessage);
+        console.error(errorMessage);
+      },
+    });
   });
 
   $(document).on('click', '.combinationeditor-manager .delete', (event) => {
