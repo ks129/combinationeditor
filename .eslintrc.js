@@ -21,4 +21,8 @@ module.exports = {
     'keyword-spacing': 0,
     'class-methods-use-this': 0,
   },
+  globals: {
+    showErrorMessage: true,
+    showSuccessMessage: true,
+  },
 };
