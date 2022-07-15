@@ -13,28 +13,39 @@
 const {$} = window;
 
 $(document).ready(() => {
-  $('.combinationeditor-manager .combinationeditor-attribute-group').change((event) => {
-    event.preventDefault();
-
+  $(document).on('change', '.combinationeditor-manager .combinationeditor-attribute-group', (event) => {
+    const select = $(event.target);
     // Fetch new attributes data
     $.ajax({
       type: 'GET',
-      url: $(this).data('url'),
+      url: select.find(':selected').data('url'),
+      dataType: 'JSON',
       success: (response) => {
-        console.log(response);
+        const attributesSelect = select.closest('.row').find('.combinationeditor-attribute');
+        attributesSelect.html('');
+
+        $.each(response, (key, value) => {
+          attributesSelect.append(`<option value="${value}">${key}</option>`);
+        });
       },
     });
   });
 
-  $('.combinationeditor-manager .combinationeditor-add-attribute').click((event) => {
+  $(document).on('click', '.combinationeditor-manager .combinationeditor-add-attribute', (event) => {
+    event.preventDefault();
+
+    const collection = $('ul.attributes-collection');
+    const newForm = collection.data('prototype').replace(/__COMBINATION_ATTRIBUTE_INDEX__/g, collection.children().length);
+    collection.append(`<li>${newForm}</li>`);
+    window.prestaShopUiKit.init();
+  });
+
+  $(document).on('click', '.combinationeditor-manager .combinationeditor-save', (event) => {
     event.preventDefault();
   });
 
-  $('.combinationeditor-manager .combinationeditor-save').click((event) => {
+  $(document).on('click', '.combinationeditor-manager .delete', (event) => {
     event.preventDefault();
-  });
-
-  $('.combinationeditor-manager .delete').click((event) => {
-    event.preventDefault();
+    $(event.target).closest('.row').remove();
   });
 });

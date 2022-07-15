@@ -37,6 +37,7 @@ services:
       - '@prestashop.module.combinationeditor.choice_provider.attribute_group_choice_provider'
       - '@prestashop.module.combinationeditor.data_provider.attribute_data_provider'
       - '@=service("prestashop.adapter.legacy.context").getLanguage().id'
+      - '@router'
     tags:
       - { name: form.type }
 

@@ -32,7 +32,7 @@ class CombinationEditorController extends FrameworkBundleAdminController
         $langId = $this->get('prestashop.adapter.legacy.context')->getLanguage()->id;
 
         foreach ($attributeDataProvider->getAttributes($attributeGroupId, (int) $langId) as $attribute) {
-            $choices[$attribute['name']] = (int) $choices['id_attribute'];
+            $choices[$attribute['name']] = (int) $attribute['id_attribute'];
         }
 
         return new JsonResponse($choices);

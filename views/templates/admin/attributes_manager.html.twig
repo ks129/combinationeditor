@@ -17,7 +17,7 @@
   <h2>{{ 'Attributes'|trans({}, 'Modules.Combinationeditor.Feature') }}</h2>
   <p class="subtitle">{{ 'Use "Save attributes" button for saving, standard product save button doesn\'t save attributes.'|trans({}, 'Modules.Combinationeditor.Help') }}</p>
   {{ form_errors(attributesForm.attributes) }}
-  <ul class="attriubtesCollection nostyle" data-prototype="{% filter escape %}{{ include('@Modules/combinationeditor/views/templates/admin/attribute.html.twig', {'form': attributesForm.attributes.vars.prototype}) }}{% endfilter %}">
+  <ul class="attributes-collection nostyle" data-prototype="{% filter escape %}{{ include('@Modules/combinationeditor/views/templates/admin/attribute.html.twig', {'form': attributesForm.attributes.vars.prototype}) }}{% endfilter %}">
     {% for field in attributesForm.attributes %}
       {{ include('@Modules/combinationeditor/views/templates/admin/attribute.html.twig', {'form': field}) }}
     {% endfor %}
