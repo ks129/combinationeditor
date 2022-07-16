@@ -17,17 +17,14 @@ const {$} = window;
 $(document).ready(() => {
   new ChoiceTable();
 
-  $(document).on('change', '.combinationeditor-manager .combinationeditor-attribute-group', (event) => {
-    const select = $(event.target);
-    const groupIndex = select.closest('.row').index();
-
-    // Fetch new attributes data
+  function updateChoices(url, attributeGroupSelect) {
     $.ajax({
       type: 'GET',
-      url: select.find(':selected').data('url'),
+      url,
       dataType: 'JSON',
       success: (response) => {
-        const attributesTable = select.closest('.row').find('div.choice-table table.table tbody');
+        const groupIndex = attributeGroupSelect.closest('.row').index();
+        const attributesTable = attributeGroupSelect.closest('.row').find('div.choice-table table.table tbody');
         attributesTable.html('');
 
         // No way to get it from each
@@ -53,14 +50,22 @@ $(document).ready(() => {
         });
       },
     });
+  }
+
+  $(document).on('change', '.combinationeditor-manager .combinationeditor-attribute-group', (event) => {
+    const select = $(event.target);
+
+    // Fetch new attributes data
+    updateChoices(select.find(':selected').data('url'), select);
   });
 
   $(document).on('click', '.combinationeditor-manager .combinationeditor-add-attribute', (event) => {
     event.preventDefault();
 
     const collection = $('ul.attributes-collection');
-    const newForm = collection.data('prototype').replace(/__COMBINATION_ATTRIBUTE_INDEX__/g, collection.children().length);
-    collection.append(`<li>${newForm}</li>`);
+    const newForm = $(collection.data('prototype').replace(/__COMBINATION_ATTRIBUTE_INDEX__/g, collection.children().length));
+    collection.append(newForm);
+    updateChoices(newForm.find('select.combinationeditor-attribute-group :selected').data('url'), newForm.find('select.combinationeditor-attribute-group'));
     window.prestaShopUiKit.init();
   });
 
