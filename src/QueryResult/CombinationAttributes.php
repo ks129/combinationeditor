@@ -34,6 +34,9 @@ class CombinationAttributes
         $this->combinationAttributes = $combinationAttributes;
     }
 
+    /**
+     * @return array<CombinationAttribute>
+     */
     public function getCombinationAttributes(): array
     {
         return $this->combinationAttributes;

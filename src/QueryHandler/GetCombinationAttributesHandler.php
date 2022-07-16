@@ -58,12 +58,17 @@ class GetCombinationAttributesHandler
             WHERE pac.`id_product_attribute` = ' . $combinationId . ';
         ');
 
+        $attributes = [];
+        foreach ($data as $attr) {
+            $attributes[(int) $attr['id_attribute_group']][] = (int) $attr['id_attribute'];
+        }
+
         $combinationAttributes = [];
 
-        foreach ($data as $attr) {
+        foreach ($attributes as $attributeGroupId => $attributeIds) {
             $combinationAttributes[] = new CombinationAttribute(
-                (int) $attr['id_attribute'],
-                (int) $attr['id_attribute_group']
+                $attributeIds,
+                (int) $attributeGroupId
             );
         }
 

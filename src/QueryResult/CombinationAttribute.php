@@ -25,9 +25,9 @@ use PrestaShop\PrestaShop\Core\Domain\Product\AttributeGroup\ValueObject\Attribu
 class CombinationAttribute
 {
     /**
-     * @var AttributeId
+     * @var array<AttributeId>
      */
-    private $attributeId;
+    private $attributeIds;
 
     /**
      * @var AttributeGroupId
@@ -38,18 +38,21 @@ class CombinationAttribute
      * @param int $attributeId
      * @param int $attributeGroupId
      */
-    public function __construct(int $attributeId, int $attributeGroupId)
+    public function __construct(array $attributeIds, int $attributeGroupId)
     {
-        $this->attributeId = new AttributeId($attributeId);
         $this->attributeGroupId = new AttributeGroupId($attributeGroupId);
+
+        foreach ($attributeIds as $attributeId) {
+            $this->attributeIds[] = new AttributeId($attributeId);
+        }
     }
 
     /**
-     * @return AttributeId
+     * @return array<AttributeId>
      */
-    public function getAttributeId(): AttributeId
+    public function getAttributeIds(): array
     {
-        return $this->attributeId;
+        return $this->attributeIds;
     }
 
     /**

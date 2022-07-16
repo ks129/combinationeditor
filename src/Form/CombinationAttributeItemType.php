@@ -18,6 +18,7 @@ namespace PrestaShop\Module\CombinationEditor\Form;
 
 use PrestaShop\Module\CombinationEditor\ChoiceProvider\AttributeGroupChoiceProvider;
 use PrestaShop\Module\CombinationEditor\DataProvider\AttributeDataProvider;
+use PrestaShopBundle\Form\Admin\Type\MaterialChoiceTableType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -104,7 +105,7 @@ class CombinationAttributeItemType extends AbstractType
             $choices[$attribute['name']] = (int) $attribute['id_attribute'];
         }
 
-        $form->add('attribute', ChoiceType::class, [
+        $form->add('attribute', MaterialChoiceTableType::class, [
             'choices' => $choices,
             'attr' => ['class' => 'combinationeditor-attribute'],
         ]);

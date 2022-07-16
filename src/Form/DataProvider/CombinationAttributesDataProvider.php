@@ -49,9 +49,14 @@ final class CombinationAttributesDataProvider implements FormDataProviderInterfa
         ];
 
         foreach ($combinationAttributes->getCombinationAttributes() as $combinationAttribute) {
+            $attributeIds = [];
+            foreach ($combinationAttribute->getAttributeIds() as $attrId) {
+                $attributeIds[] = $attrId->getValue();
+            }
+
             $data['attributes'][] = [
                 'attribute_group' => $combinationAttribute->getAttributeGroupId()->getValue(),
-                'attribute' => $combinationAttribute->getAttributeId()->getValue(),
+                'attribute' => $attributeIds,
             ];
         }
 
