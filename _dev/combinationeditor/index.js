@@ -19,17 +19,37 @@ $(document).ready(() => {
 
   $(document).on('change', '.combinationeditor-manager .combinationeditor-attribute-group', (event) => {
     const select = $(event.target);
+    const groupIndex = select.closest('.row').index();
+
     // Fetch new attributes data
     $.ajax({
       type: 'GET',
       url: select.find(':selected').data('url'),
       dataType: 'JSON',
       success: (response) => {
-        const attributesSelect = select.closest('.row').find('.combinationeditor-attribute');
-        attributesSelect.html('');
+        const attributesTable = select.closest('.row').find('div.choice-table table.table tbody');
+        attributesTable.html('');
+
+        // No way to get it from each
+        let i = 0;
 
         $.each(response, (key, value) => {
-          attributesSelect.append(`<option value="${value}">${key}</option>`);
+          attributesTable.append(`
+            <tr>
+              <td>
+                <div class="form-check form-check-radio form-checkbox">
+                  <div class="md-checkbox md-checkbox-inline">
+                    <label>
+                      <input type="checkbox" id="combinationeditor_attributes_attributes_${groupIndex}_attribute${i}" name="combinationeditor_attributes[attributes][${groupIndex}][attribute][]" class="form-check-input" value="${value}"/>
+                      <i class="md-checkbox-control"></i>
+                      ${key}
+                    </label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          `);
+          i += 1;
         });
       },
     });

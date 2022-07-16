@@ -57,9 +57,22 @@ class CombinationEditorController extends FrameworkBundleAdminController
 
         $data = $form->getData();
         $attributeIds = [];
+        $attributeGroupIds = [];
 
         foreach ($data['attributes'] as $attribute) {
-            $attributeIds[] = (int) $attribute['attribute'];
+            $attributeGroupIds[] = (int) $attribute['attribute_group'];
+            foreach ($attribute['attribute'] as $attr) {
+                $attributeIds[] = (int) $attr;
+            }
+        }
+
+        if (count($attributeGroupIds) > count(array_unique($attributeGroupIds))) {
+            return new JsonResponse(
+                [
+                    'success' => false,
+                    'message' => $this->trans('Duplicate attribute groups are not allowed.', 'Modules.Combinationeditor.Error'),
+                ]
+            );
         }
 
         // Combinations must have at least one attribute
