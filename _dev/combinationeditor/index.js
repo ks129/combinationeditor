@@ -62,7 +62,9 @@ $(document).ready(() => {
   $(document).on('click', '.combinationeditor-manager .combinationeditor-add-attribute', (event) => {
     event.preventDefault();
 
-    const collection = $('ul.attributes-collection');
+    const btn = $(event.target);
+
+    const collection = btn.prev();
     const newForm = $(collection.data('prototype').replace(/__COMBINATION_ATTRIBUTE_INDEX__/g, collection.children().length));
     collection.append(newForm);
     updateChoices(newForm.find('select.combinationeditor-attribute-group :selected').data('url'), newForm.find('select.combinationeditor-attribute-group'));
