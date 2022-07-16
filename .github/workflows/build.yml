@@ -16,6 +16,14 @@ jobs:
                   always-auth: true
                   registry-url: https://npm.pkg.github.com
 
+            - name: Clone PrestaShop for core dependencies
+              run: |
+                  git clone --depth=50 -b 1.7.8.x https://github.com/PrestaShop/PrestaShop.git ~/PrestaShop
+                  cd ..
+                  mv combinationeditor ~/PrestaShop/modules
+                  ln -s ~/PrestaShop/modules/combinationeditor
+                  cd combinationeditor
+
             - name: Install JS dependencies
               run: npm install --ignore-scripts
 
@@ -23,6 +31,8 @@ jobs:
               run: |
                   npm run build
                   rm -rf node_modules/
+              env:
+                  INIT_CWD: '~/PrestaShop/modules/combinationeditor'
 
             # Install PHP dependencies
             - name: Install composer dependencies

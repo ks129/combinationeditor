@@ -31,6 +31,12 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.js'],
+    alias: {
+      '@components': path.resolve(__dirname, '../../admin-dev/themes/new-theme/js/components'),
+    },
+  },
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin({extractComments: false})],

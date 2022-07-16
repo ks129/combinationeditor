@@ -10,9 +10,13 @@
 *  @copyright 2022 Karlis Suvi
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 */
+import ChoiceTable from '@components/choice-table';
+
 const {$} = window;
 
 $(document).ready(() => {
+  new ChoiceTable();
+
   $(document).on('change', '.combinationeditor-manager .combinationeditor-attribute-group', (event) => {
     const select = $(event.target);
     // Fetch new attributes data
