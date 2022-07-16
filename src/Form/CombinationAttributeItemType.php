@@ -18,7 +18,7 @@ namespace PrestaShop\Module\CombinationEditor\Form;
 
 use PrestaShop\Module\CombinationEditor\ChoiceProvider\AttributeGroupChoiceProvider;
 use PrestaShop\Module\CombinationEditor\DataProvider\AttributeDataProvider;
-use PrestaShopBundle\Form\Admin\Type\MaterialChoiceTableType;
+use PPrestaShopBundle\Form\Admin\Type\Material\MaterialChoiceTableType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;

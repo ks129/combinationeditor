@@ -35,7 +35,7 @@ class CombinationAttribute
     private $attributeGroupId;
 
     /**
-     * @param int $attributeId
+     * @param array<int> $attributeIds
      * @param int $attributeGroupId
      */
     public function __construct(array $attributeIds, int $attributeGroupId)
